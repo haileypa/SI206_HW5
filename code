@@ -71,7 +71,16 @@ def get_tweets_from_search():
 	for tweet in twitter_results["statuses"]:
 		tweet_info.update({tweet["text"]:tweet["created_at"]})
 	return tweet_info
-
+	
+	
+tweets3 = get_tweets_from_search()
+x = 0
+for tweet in tweets3:
+	if x < 3:
+		print("TEXT:", tweet)
+		print("CREATED AT:", tweets2[tweet])
+		print("\n")
+	x = x + 1
 
 #### Recommended order of tasks: ####
 ## 1. Set up the caching pattern start -- the dictionary and the try/except statement shown in class.
