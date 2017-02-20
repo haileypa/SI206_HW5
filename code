@@ -45,6 +45,14 @@ auth.set_access_token(access_token, access_token_secret)
 api = tweepy.API(auth, parser=tweepy.parsers.JSONParser()) # Set up library to grab stuff from twitter with your authentication, and return it in a JSON-formatted way
 
 ## Write the rest of your code here!
+CACHE_FNAME = 'cache_file_name.json'
+try:
+    cache_file = open(CACHE_FNAME, 'r') 
+    cache_contents = cache_file.read() 
+    CACHE_DICTION = json.loads(cache_contents) 
+    cache_file.close() 
+except:
+    CACHE_DICTION = {} 
 
 
 #### Recommended order of tasks: ####
