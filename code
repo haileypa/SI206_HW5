@@ -54,6 +54,24 @@ try:
 except:
     CACHE_DICTION = {} 
 
+def get_tweets_from_search():
+	search_phrase = input("Search Twitter for tweets with: ")
+	unique_identifier = "twitter_{}".format(search_phrase)
+	if unique_identifier in CACHE_DICTION:
+		print('using cached data for', search_phrase)
+		twitter_results = CACHE_DICTION[unique_identifier]
+	else:
+		print('getting data from internet for', search_phrase)
+		twitter_results = api.search(q=search_phrase)
+		CACHE_DICTION[unique_identifier] = twitter_results
+		f = open(CACHE_FNAME,'w')
+		f.write(json.dumps(CACHE_DICTION))
+		f.close()
+	tweet_info = {}
+	for tweet in twitter_results["statuses"]:
+		tweet_info.update({tweet["text"]:tweet["created_at"]})
+	return tweet_info
+
 
 #### Recommended order of tasks: ####
 ## 1. Set up the caching pattern start -- the dictionary and the try/except statement shown in class.
